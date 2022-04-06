@@ -1,0 +1,31 @@
+<div *ngIf="hero">
+
+  <h2>{{hero.name | uppercase}} Details</h2>
+
+  <div><span>id: </span>{{hero.id}}</div>
+
+  <div>
+    <label for="hero-name">Hero name: </label>
+    <input id="hero-name" [(ngModel)]="hero.name" placeholder="Hero name"/>
+  </div>
+
+  <div>
+    <button type="button" routerLink="/superpowerForm/{{hero.id}}">
+      Add Superpower
+    </button>
+  </div>
+
+  <br>
+
+  <div>
+    <label for="hero-name">Hero superpowers: </label>
+    <ul>
+      <li *ngFor="let superpower of hero.superpower">
+        {{ superpower.name }} <button type="button" (click)="destroy(superpower.name)">Delete</button>
+      </li>
+    </ul>
+  </div>
+
+  <button type="button" (click)="goBack()">go back</button>
+
+</div>
