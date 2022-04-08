@@ -9,6 +9,8 @@
     <input id="hero-name" [(ngModel)]="hero.name" placeholder="Hero name"/>
   </div>
 
+  <button type="button" (click)="save()">save</button>
+
   <div>
     <button type="button" routerLink="/superpowerForm/{{hero.id}}">
       Add Superpower
