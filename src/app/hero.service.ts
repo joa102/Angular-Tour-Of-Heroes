@@ -68,6 +68,12 @@ export class HeroService {
     );
   }
 
+  getImage(hero: Hero): Observable<String> {
+    // const url = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${hero.name}&ts=977943600&apikey=d0f9d2fcc8a9eba91bc61c341e52dcc7&hash=4873a27f9a1aecbacd25ecd62c820c4f`;
+    const url = `https://gateway.marvel.com:443/v1/public/characters?nameStartsWith=${hero.name}&ts=1000&apikey=9faf49d39cce95ec4db851d1a773570c&hash=a632aeba43d5f3bcc3382b6dc7f56bbb`;
+    return this.http.get<String>(url);
+  }
+
   /* GET heroes whose name contains search term */
   searchHeroes(term: string): Observable<Hero[]> {
     if (!term.trim()) {
@@ -102,9 +108,20 @@ export class HeroService {
     );
   }
 
+  /** DELETE: delete the superpower on hero from the server */
+  deleteSuperpower(id: number): Observable<Hero> {
+    const url = `${this.heroesUrl}/superpower/${id}`;
+
+    return this.http.delete<Hero>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted superpower id=${id}`)),
+      catchError(this.handleError<Hero>('deleteSuperpower'))
+    );
+  }
+
   /** PUT: update the hero on the server */
   updateHero(hero: Hero): Observable<any> {
-    return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
+    const url = `${this.heroesUrl}/${hero.id}`;
+    return this.http.put(url, hero, this.httpOptions).pipe(
       tap(_ => this.log(`updated hero id=${hero.id}`)),
       catchError(this.handleError<any>('updateHero'))
     );

@@ -4,29 +4,50 @@
 
   <div><span>id: </span>{{hero.id}}</div>
 
+  <div *ngIf="image">
+    <img src="{{image}}" alt="{{hero.name}}" width="400" height="400">
+  </div>
+
   <div>
     <label for="hero-name">Hero name: </label>
     <input id="hero-name" [(ngModel)]="hero.name" placeholder="Hero name"/>
-  </div>
-
-  <button type="button" (click)="save()">save</button>
-
-  <div>
-    <button type="button" routerLink="/superpowerForm/{{hero.id}}">
-      Add Superpower
-    </button>
+    <button type="button" class="add-button" (click)="save()">Save</button>
   </div>
 
   <br>
 
-  <div>
+  <!-- <div>
     <label for="hero-name">Hero superpowers: </label>
     <ul>
       <li *ngFor="let superpower of hero.superpower">
         {{ superpower.name }} <button type="button" (click)="destroy(superpower.name)">Delete</button>
       </li>
     </ul>
+  </div> -->
+
+  <label for="hero-name">Hero superpowers: </label>
+  <ul class="heroes">
+    <li *ngFor="let superpower of hero.superpower">
+      <a routerLink="/detail/{{superpower.id}}">
+        <span class="badge">{{superpower.id}}</span> {{superpower.name}}
+      </a>
+      <button type="button" class="delete" title="delete hero"
+          (click)="delete(superpower)">x</button>
+      <!-- <button type="button" class="delete" title="delete hero"
+          (click)="destroy(superpower.name)">x</button> -->
+    </li>
+  </ul>
+
+
+  <br>
+
+  <div>
+    <button type="button" class="add-button" routerLink="/superpowerForm/{{hero.id}}">
+      Add Superpower
+    </button>
   </div>
+
+  <br>
 
   <button type="button" (click)="goBack()">go back</button>
 

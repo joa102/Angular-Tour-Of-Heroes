@@ -43,9 +43,17 @@ export class SuperpowerFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.hero?.superpower.push( { name: this.angForm.value.superpower_name } );
-    this.goBack();
+    // const id = Number(this.route.snapshot.paramMap.get('id'));
+    // this.hero?.superpower.push( { name: this.angForm.value.superpower_name } );
+    // this.goBack();
+    this.save();
+  }
+
+  save(): void {
+    if (this.hero) {
+      this.heroService.updateHero(this.hero)
+        .subscribe(() => this.goBack());
+    }
   }
 
   goBack(): void {

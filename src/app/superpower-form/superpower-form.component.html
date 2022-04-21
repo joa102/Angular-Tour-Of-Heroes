@@ -4,18 +4,21 @@
 
   <div><span>id: </span>{{hero.id}}</div>
 
-  <form [formGroup]="angForm" (ngSubmit)="onSubmit()">
+  <!-- <form [formGroup]="angForm" (ngSubmit)="onSubmit()"> -->
 
-    <div>
+    <!-- <div>
       <label for="superpower_name">Superpower name: </label>
       <input id="superpower_name" type="text" formControlName="superpower_name">
-    </div>
+      <button type="submit" class="add-button" >Add</button>
+    </div> -->
 
     <div>
-      <button class="button" type="submit">Add</button>
+      <label for="superpower-name">Hero Superpower: </label>
+      <input id="superpower-name" [(ngModel)]="hero.superpower" placeholder="Superpower name"/>
+      <button type="button" class="add-button" (click)="save()">Save</button>
     </div>
 
-  </form>
+  <!-- </form> -->
 
   <button type="button" (click)="goBack()">go back</button>
 
